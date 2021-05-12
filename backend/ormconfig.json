@@ -1,0 +1,13 @@
+[
+  {
+    "name": "default",
+    "type": "postgres",
+    "host": "103.245.166.20",
+    "port": 5432,
+    "username": "guest",
+    "password": "Theshowhopper",
+    "database": "",
+    "synchronize": false,
+    "entities": ["entities/*.js"]
+  }
+]
