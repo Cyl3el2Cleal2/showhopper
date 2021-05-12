@@ -1,8 +1,8 @@
-import { Column, Entity } from "typeorm";
+import { PrimaryColumn, Column, Entity } from "typeorm";
 
 @Entity("disney", { schema: "public" })
 export class Disney {
-  @Column("character varying", { name: "imdb_id", nullable: true })
+  @PrimaryColumn("character varying", { name: "imdb_id" })
   imdbId: string | null;
 
   @Column("character varying", { name: "title", nullable: true })
