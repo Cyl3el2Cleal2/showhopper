@@ -37,12 +37,14 @@ class Server {
             entities: [__dirname + '/entities/*'],
             synchronize: false,
             logging: true,
+        }).then((con)=>{
+            console.log('Server is connected to Database')
         })
     }
 
     listen() {
         this.app.listen(config.SERVER_PORT, () => {
-            console.log('Server is listen on port', config.SERVER_PORT)
+            console.log('Server is listenning on port', config.SERVER_PORT)
         })
     }
 }
