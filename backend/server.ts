@@ -36,7 +36,7 @@ class Server {
             database: config.DB_DATABASE,
             entities: [__dirname + '/entities/*'],
             synchronize: false,
-            logging: true,
+            // logging: true,
         }).then((con)=>{
             console.log('Server is connected to Database')
         })
