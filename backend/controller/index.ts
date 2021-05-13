@@ -4,6 +4,7 @@ const router = Router();
 
 const routes = {
     'disney': require('./disney'),
+    'meta': require('./meta')
 }
 
 function makeHandler(handler: RequestHandler) {
