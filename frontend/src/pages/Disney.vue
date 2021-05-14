@@ -117,6 +117,15 @@
           {{ year }}
         </option>
       </select>
+      <select
+        v-model="filter.min_imdb"
+        class="border-gray-300 px-1 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      >
+        <option value="">Min Imdb</option>
+        <option v-for="i in 9" :value="i" :key="i">
+          {{ i }}
+        </option>
+      </select>
     </div>
 
     <div class="text-right text-sm mt-2">{{ disneyCount }} results</div>
@@ -166,6 +175,7 @@ export default defineComponent({
       language: "",
       genre: "",
       year: "",
+      min_imdb: "",
       skip: 0,
     });
 
@@ -230,6 +240,7 @@ export default defineComponent({
       filter.language = "";
       filter.genre = "";
       filter.year = "";
+      filter.min_imdb = "";
       filter.type = page;
       filter.skip = 0;
       await getDisney();
