@@ -4,8 +4,10 @@ import { Disney } from '../entities/Disney';
 
 async function getById(req: Request, res: Response) {
     const field = req.params.id
-    if (['type', 'language', 'genre'].includes(field)) {
-        const raw_result = await getRepository(Disney).createQueryBuilder().select(field).distinct(true).getRawMany();
+
+    const disney_type = req.query.type
+    if (['language', 'genre', 'year'].includes(field) && disney_type) {
+        const raw_result = await getRepository(Disney).createQueryBuilder().select(field).distinct(true).where("type = :type", { type: disney_type }).getRawMany();
         // console.log(result)
 
         //Format data for some field
@@ -32,18 +34,18 @@ async function getById(req: Request, res: Response) {
             return res.send(result)
         }
 
-        //Format data for type
-        if (field === 'type') {
+        else {
             const format_result = raw_result.map(val => {
-                return val.type
+                return val[field]
             })
-            return res.send({
-                type: format_result
-            })
+
+            const result = {};
+            result[field] = format_result.sort();
+            return res.send(result)
         }
         return res.send(raw_result)
     }
-    return res.status(404).send();
+    return res.status(404).send('Not found params type');
 }
 
 export {
