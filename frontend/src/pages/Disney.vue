@@ -73,37 +73,12 @@
       class="w-full grid gap-1 grd-flow-col sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
     >
       <!-- component -->
-      <div
+      <tile
         class="relative rounded overflow-hidden border"
         v-for="disney in disneys"
         :key="disney.imdbId"
-      >
-        <img
-          class="w-full bg-cover"
-          :src="`/img/disney/${(disney.title.length % 11) + 1}.png`"
-          loading="lazy"
-        />
-        <div class="relative px-3 pb-2">
-          <div v-if="disney.imdbRating" class="absolute -top-3 right-2">
-            <span
-              class="items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full"
-            >
-              {{ disney.imdbRating.toFixed(1) }}</span
-            >
-          </div>
-
-          <div class="py-2 mb-2">
-            <div class="text-sm">
-              <span class="font-semibold">{{ disney.title }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="absolute bottom-1.5 right-3">
-          <span class="text-xs text-gray-400 font-light"
-            >{{ disney.runtime }} views</span
-          >
-        </div>
-      </div>
+        v-bind="disney"
+      />
     </div>
   </div>
 </template>
@@ -118,7 +93,9 @@ import {
   reactive,
   onMounted,
 } from "vue";
+import Tile from "../components/Tile.vue";
 export default defineComponent({
+  components: { Tile },
   name: "Disney",
   setup: () => {
     const axios: AxiosStatic = inject("$axios") as AxiosStatic;
