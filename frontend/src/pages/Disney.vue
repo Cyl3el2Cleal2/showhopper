@@ -35,7 +35,7 @@
     </div>
   </nav>
   <div
-    class="container px-6 py-1 mt-4 rounded-lg shadow-md mx-auto bg-gray-200"
+    class="container px-6 py-1 md:mt-4 rounded-lg shadow-md mx-auto bg-gray-200"
   >
     <div class="mt-6 flex space-x-2 place-content-center">
       <!-- component -->
@@ -108,6 +108,15 @@
           {{ language }}
         </option>
       </select>
+      <select
+        v-model="filter.year"
+        class="border-gray-300 px-1 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      >
+        <option value="">All Year</option>
+        <option v-for="year in metaYear" :value="year" :key="year">
+          {{ year }}
+        </option>
+      </select>
     </div>
 
     <div class="text-right text-sm mt-2">{{ disneyCount }} results</div>
@@ -146,6 +155,7 @@ export default defineComponent({
     const disneys = ref([]);
     const metaLanguage = ref([]);
     const metaGenre = ref([]);
+    const metaYear = ref([]);
 
     const disneyCount = ref(0);
 
@@ -155,6 +165,7 @@ export default defineComponent({
       type: "",
       language: "",
       genre: "",
+      year: "",
       skip: 0,
     });
 
@@ -204,6 +215,10 @@ export default defineComponent({
       return (metaGenre.value = await getMetaByType("genre"));
     };
 
+    const getMetaYear = async () => {
+      return (metaYear.value = await getMetaByType("year"));
+    };
+
     const navClick = async (goto: string) => {
       if (goto !== filter.type) {
         await goToPage(goto);
@@ -214,11 +229,13 @@ export default defineComponent({
       disneys.value = [];
       filter.language = "";
       filter.genre = "";
+      filter.year = "";
       filter.type = page;
       filter.skip = 0;
       await getDisney();
       getMetaGenre();
       getMetaLanguage();
+      getMetaYear();
     };
 
     onBeforeMount(async () => {
@@ -236,6 +253,7 @@ export default defineComponent({
       getDisney,
       metaLanguage,
       metaGenre,
+      metaYear,
       goToPage,
       navClick,
       showFilter,
