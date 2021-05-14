@@ -14,21 +14,21 @@
     <div class="cursor-pointer">
       <spane
         :class="filter.type === 'movie' ? 'underline' : ''"
-        @click="goToPage('movie')"
+        @click="navClick('movie')"
         class="px-1 align-middle"
         >Movies</spane
       >
 
       <spane
         :class="filter.type === 'series' ? 'underline' : ''"
-        @click="goToPage('series')"
+        @click="navClick('series')"
         class="px-1 align-middle"
         >Series</spane
       >
 
       <spane
         :class="filter.type === 'episode' ? 'underline' : ''"
-        @click="goToPage('episode')"
+        @click="navClick('episode')"
         class="px-1 align-middle"
         >Episode</spane
       >
@@ -70,7 +70,7 @@
     <div class="text-right text-sm">{{ disneyCount }} results</div>
 
     <div
-      class="w-full grid gap-1 grd-flow-col sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+      class="w-full grid gap-x-2.5 gap-y-4 grd-flow-col sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
     >
       <!-- component -->
       <tile
@@ -159,21 +159,25 @@ export default defineComponent({
       return (metaGenre.value = await getMetaByType("genre"));
     };
 
-    const goToPage = async (page: string) => {
-      if (page !== filter.type) {
-        disneys.value = [];
-        filter.language = "";
-        filter.genre = "";
-        filter.type = page;
-        filter.skip = 0;
-        getDisney();
-        getMetaGenre();
-        getMetaLanguage();
+    const navClick = async (goto: string) => {
+      if (goto !== filter.type) {
+        await goToPage(goto);
       }
     };
 
+    const goToPage = async (page: string) => {
+      disneys.value = [];
+      filter.language = "";
+      filter.genre = "";
+      filter.type = page;
+      filter.skip = 0;
+      await getDisney();
+      getMetaGenre();
+      getMetaLanguage();
+    };
+
     onBeforeMount(async () => {
-      goToPage("movie");
+      await goToPage("movie");
     });
 
     onMounted(async () => {
@@ -188,6 +192,7 @@ export default defineComponent({
       metaLanguage,
       metaGenre,
       goToPage,
+      navClick,
     };
   },
 });
