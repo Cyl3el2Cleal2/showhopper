@@ -41,6 +41,7 @@
       <!-- component -->
       <div class="relative flex-1">
         <input
+          v-model="filter.title"
           type="text"
           class="bg-purple-white shadow-md rounded border-0 py-2 px-3 w-full"
           placeholder="Search by name..."
@@ -121,9 +122,9 @@
         v-model="filter.min_imdb"
         class="border-gray-300 px-1 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       >
-        <option value="">Min Imdb</option>
+        <option value="">All Imdb</option>
         <option v-for="i in 9" :value="i" :key="i">
-          {{ i }}
+          {{ i }} and higer
         </option>
       </select>
     </div>
@@ -176,6 +177,7 @@ export default defineComponent({
       genre: "",
       year: "",
       min_imdb: "",
+      title: "",
       skip: 0,
     });
 
@@ -244,6 +246,7 @@ export default defineComponent({
       filter.genre = "";
       filter.year = "";
       filter.min_imdb = "";
+      filter.title = "";
       filter.type = page;
       filter.skip = 0;
       await getDisney();
