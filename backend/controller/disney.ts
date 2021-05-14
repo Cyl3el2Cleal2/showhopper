@@ -27,6 +27,11 @@ async function getAll(req: Request, res: Response) {
         filter.where.type = Equal(type);
     }
 
+    const year = req.query.year || null;
+    if (year) {
+        filter.where.year = Equal(year);
+    }
+
     const genre = req.query.genre || null;
     if (genre) {
         // filter.where.genre = Raw(alias => `(:...genre) IN ${alias}   `, {genre: genre.toString().split(' ').map((x)=>{return `{ ${x}}`})})
