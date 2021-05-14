@@ -14,7 +14,7 @@
         >
       </div>
 
-      <div class="py-2 mb-2">
+      <div class="py-2 mb-1">
         <div class="text-sm">
           <span class="font-semibold">{{ title }}</span>
         </div>
