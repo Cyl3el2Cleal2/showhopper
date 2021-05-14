@@ -180,6 +180,9 @@ export default defineComponent({
     });
 
     const getDisney = async (disneyType = filter.type, loadMore = false) => {
+      if (loadMore == false) {
+        filter.skip = 0;
+      }
       filter.type = disneyType;
       const res = await axios.get("api/disney", {
         params: filter,
