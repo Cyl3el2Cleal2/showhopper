@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import { createConnection } from 'typeorm';
 
 import { router } from './controller';
@@ -15,6 +16,9 @@ class Server {
     initialize() {
         //Express Instant
         this.app = express();
+
+        //CORS
+        this.app.use(cors());
 
         //HTTP Log
         this.app.use(morgan('dev'));
