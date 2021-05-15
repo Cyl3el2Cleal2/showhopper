@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
@@ -11,6 +11,7 @@
     "vue": "^3.0.5"
   },
   "devDependencies": {
+    "@types/node": "^15.0.3",
     "@vitejs/plugin-vue": "^1.2.2",
     "@vue/compiler-sfc": "^3.0.5",
     "autoprefixer": "^10.2.5",
