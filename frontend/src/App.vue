@@ -1,5 +1,5 @@
 <template>
-  <disney msg="Hello Vue 3 + TypeScript + Vite" />
+  <disney />
 </template>
 
 <script lang="ts">
@@ -21,6 +21,6 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  overflow-y: auto;
 }
 </style>
